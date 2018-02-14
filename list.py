@@ -5,6 +5,7 @@ import json
 class List:
 	def __init__(self,server,listId):
 		r=requests.get(server+'/api/'+listId+'/')
+		self.listId=listId
 		if(r.status_code == 200):
 			data=json.loads(r.text)
 
@@ -14,6 +15,10 @@ class List:
 
 			for item in data.get('items',[]):
 				self.items.append(Item(item))
+	def show(self):
+		print(self.title)
+		for item in self.items:
+			print("- {}".format(str(item)))
 
 class Item:
 	def __init__(self,itemDict):
