@@ -1,4 +1,6 @@
 import argparse
+import actions
+from sList import List
 
 parser=argparse.ArgumentParser()
 subParsers=parser.add_subparsers(dest="command")
@@ -16,7 +18,14 @@ editParse.add_argument("value",help="the new value for the item")
 
 clearParse=subParsers.add_parser("clear",help="clears the list")
 
-parser.add_argument("--list",help="sets the list ID")
-parser.add_argument("--server",help="the URL of the server to contact")
+parser.add_argument("--list",help="sets the list ID",default="Demo")
+parser.add_argument("--server",help="the URL of the server to contact",default='https://list.tilman.ninja')
 
-parser.parse_args()
+args=parser.parse_args()
+
+sl=List(args.server,args.list)
+
+if(args.command):
+	actions.actionDict[args.command](args)
+
+sl.show()
