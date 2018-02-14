@@ -29,10 +29,13 @@ class List:
 		self.load()
 	def delete(self,item):
 		r=requests.delete(self.listUrl()+'/items/'+item.itemDict.get('id',''))
+		self.load()
 
 class Item:
 	def __init__(self,itemDict):
 		self.itemDict=itemDict;
+	def name(self):
+		return self.itemDict.get('name')
 	def __str__(self):
 		string=self.itemDict.get('name')
 		amount=self.itemDict.get('amount',None)
