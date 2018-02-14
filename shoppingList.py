@@ -19,6 +19,13 @@ class Item:
 	def __init__(self,itemDict):
 		self.itemDict=itemDict;
 	def __str__(self):
-		if self.itemDict.get('amount',None):
-			return self.itemDict.get('amount')+self.itemDict.get('name')
-		return self.itemDict.get('name')
+		string=self.itemDict.get('name')
+		amount=self.itemDict.get('amount',None)
+		if amount:
+			unit=amount.get('unit',None)
+			value=amount.get('value',None)
+			if unit:
+				string='{} {}'.format(unit,string)
+			if value:
+				string='{} {}'.format(value,string)
+		return string
