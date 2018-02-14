@@ -9,6 +9,8 @@ def delAction(sl,args):
 	sl.delete(item)
 
 def editAction(sl,args):
+	(item,match)=autocomplete(args.item,sl)
+	sl.edit(item,args.value)
 	pass
 
 def clearAction(sl,args):

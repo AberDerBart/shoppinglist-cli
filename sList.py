@@ -31,7 +31,8 @@ class List:
 		r=requests.delete(self.listUrl()+'/items/'+item.id())
 		self.load()
 	def edit(self,item,value):
-		r=requests.put(self.listUrl()+'/items?parse'+item.id(),json=value)
+		r=requests.put(self.listUrl()+'/items/{}?parse'.format(item.id()),json=value)
+
 		self.load()
 
 class Item:
