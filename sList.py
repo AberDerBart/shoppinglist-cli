@@ -24,16 +24,21 @@ class List:
 		print(self.title)
 		for item in self.items:
 			print("- {}".format(str(item)))
-	def add(self,itemString):
-		r=requests.post(self.listUrl()+'/items?parse',json=itemString)
+	def add(self,value):
+		r=requests.post(self.listUrl()+'/items?parse',json=value)
 		self.load()
 	def delete(self,item):
-		r=requests.delete(self.listUrl()+'/items/'+item.itemDict.get('id',''))
+		r=requests.delete(self.listUrl()+'/items/'+item.id())
+		self.load()
+	def edit(self,item,value):
+		r=requests.put(self.listUrl()+'/items?parse'+item.id(),json=value)
 		self.load()
 
 class Item:
 	def __init__(self,itemDict):
 		self.itemDict=itemDict;
+	def id(self):
+		return self.itemDict.get('id')
 	def name(self):
 		return self.itemDict.get('name')
 	def __str__(self):

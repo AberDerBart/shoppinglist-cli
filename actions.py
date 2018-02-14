@@ -6,10 +6,7 @@ def addAction(sl,args):
 	
 def delAction(sl,args):
 	(item,match)=autocomplete(args.item,sl)
-	print('del',str(item),item.itemDict.get('id'))
-	if not sl.delete(item):
-		print('ERROR')
-
+	sl.delete(item)
 
 def editAction(sl,args):
 	pass
