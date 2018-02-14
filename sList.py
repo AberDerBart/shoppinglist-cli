@@ -21,7 +21,10 @@ class List:
 	def listUrl(self):
 		return '{}/api/{}'.format(self.server,self.listId)
 	def show(self):
-		print(self.title)
+		if self.items:
+			print(self.title)
+		else:
+			print(self.title,'(empty)')
 		for item in self.items:
 			print("- {}".format(str(item)))
 	def add(self,value):
@@ -32,7 +35,10 @@ class List:
 		self.load()
 	def edit(self,item,value):
 		r=requests.put(self.listUrl()+'/items/{}?parse'.format(item.id()),json=value)
-
+		self.load()
+	def clear(self):
+		for item in self.items:
+			self.delete(item)
 		self.load()
 
 class Item:

@@ -14,7 +14,7 @@ def editAction(sl,args):
 	pass
 
 def clearAction(sl,args):
-	pass
+	sl.clear()
 
 actionDict={
 	'add': addAction,
