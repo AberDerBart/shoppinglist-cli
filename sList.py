@@ -4,8 +4,11 @@ import json
 
 class List:
 	def __init__(self,server,listId):
-		r=requests.get(server+'/api/'+listId+'/')
 		self.listId=listId
+		self.server=server
+		self.load()
+	def load(self):
+		r=requests.get(self.listUrl())
 		if(r.status_code == 200):
 			data=json.loads(r.text)
 
@@ -15,10 +18,17 @@ class List:
 
 			for item in data.get('items',[]):
 				self.items.append(Item(item))
+	def listUrl(self):
+		return '{}/api/{}'.format(self.server,self.listId)
 	def show(self):
 		print(self.title)
 		for item in self.items:
 			print("- {}".format(str(item)))
+	def add(self,itemString):
+		r=requests.post(self.listUrl()+'/items?parse',json=itemString)
+		self.load()
+	def delete(self,item):
+		r=requests.delete(self.listUrl()+'/items/'+item.itemDict.get('id',''))
 
 class Item:
 	def __init__(self,itemDict):

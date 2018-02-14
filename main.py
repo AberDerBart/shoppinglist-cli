@@ -26,6 +26,6 @@ args=parser.parse_args()
 sl=List(args.server,args.list)
 
 if(args.command):
-	actions.actionDict[args.command](args)
+	actions.actionDict[args.command](sl,args)
 
 sl.show()
