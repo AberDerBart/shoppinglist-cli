@@ -1,6 +1,15 @@
 import argparse
 import actions
 from sList import List
+import os
+
+server='https://list.tilman.ninja'
+listId='Demo'
+
+if 'SHOPPINGLIST_ID' in os.environ:
+	listId=os.environ['SHOPPINGLIST_ID']
+if 'SHOPPINGLIST_SERVER' in os.environ:
+	server=os.environ['SHOPPINGLIST_SERVER']
 
 parser=argparse.ArgumentParser()
 subParsers=parser.add_subparsers(dest="command")
@@ -18,8 +27,8 @@ editParse.add_argument("value",help="the new value for the item")
 
 clearParse=subParsers.add_parser("clear",help="clears the list")
 
-parser.add_argument("--list",help="sets the list ID",default="Demo")
-parser.add_argument("--server",help="the URL of the server to contact",default='https://list.tilman.ninja')
+parser.add_argument("--list",help="sets the list ID",default=listId)
+parser.add_argument("--server",help="the URL of the server to contact",default=server)
 
 args=parser.parse_args()
 
