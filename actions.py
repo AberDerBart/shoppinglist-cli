@@ -6,13 +6,13 @@ def addAction(sl,args):
 	
 def delAction(sl,args):
 	(item,match)=autocomplete(args.item,sl)
-	if(match < .9):
+	if(match < .8):
 		raise KeyError('No matching item found: "{}"'.format(args.item))
 	sl.delete(item)
 
 def editAction(sl,args):
 	(item,match)=autocomplete(args.item,sl)
-	if(match < .9):
+	if(match < .8):
 		raise KeyError('No matching item found: "{}"'.format(args.item))
 	sl.edit(item,args.value)
 
