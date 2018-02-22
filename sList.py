@@ -6,8 +6,8 @@ class List:
 	def __init__(self,server,listId):
 		self.listId=listId
 		self.server=server
-		self.load()
-	def load(self):
+		self.sync()
+	def sync(self):
 		r=requests.get(self.listUrl())
 		if(r.status_code == 200):
 			data=json.loads(r.text)
@@ -29,17 +29,17 @@ class List:
 			print("- {}".format(str(item)))
 	def add(self,value):
 		r=requests.post(self.listUrl()+'/items?parse',json=value)
-		self.load()
+		self.sync()
 	def delete(self,item):
 		r=requests.delete(self.listUrl()+'/items/'+item.id())
-		self.load()
+		self.sync()
 	def edit(self,item,value):
 		r=requests.put(self.listUrl()+'/items/{}?parse'.format(item.id()),json=value)
-		self.load()
+		self.sync()
 	def clear(self):
 		for item in self.items:
 			self.delete(item)
-		self.load()
+		self.sync()
 
 class Item:
 	def __init__(self,itemDict):
