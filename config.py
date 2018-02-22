@@ -26,3 +26,8 @@ parser.add_argument("--server",help="the URL of the server to contact")
 args=parser.parse_args()
 
 config=rcfile.rcfile('shoppingList',args.__dict__)
+
+if not config.get('server'):
+	config['server']=DEFAULT_SERVER
+if not config.get('list'):
+	config['list']=DEFAULT_LIST
