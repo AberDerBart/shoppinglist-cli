@@ -83,8 +83,7 @@ class List:
 		item['stringRepresentation']=value
 		self.sync()
 	def clear(self):
-		for item in self.items:
-			self.delete(item)
+		self.items.clear()
 		self.sync()
 
 def itemStr(itemDict):
