@@ -15,11 +15,9 @@ class Cache:
 		json.dump(data,f)
 		f.close()
 	def read(self):
-		f=open(self.cacheFileName)
-		if f:
-			data=json.load(f)
-			f.close()
-			return data
-		else:
+		try:
+			with open(self.cacheFileName) as f:
+				data=json.load(f)
+				return data
+		except FileNotFoundError:
 			return None
-
