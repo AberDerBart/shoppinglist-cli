@@ -3,6 +3,7 @@ import os.path
 import json
 from sList import * 
 from hashlib import md5
+import sys
 
 def cleanString(string):
 	'''transforms given string into something you can use as filename'''
@@ -20,11 +21,13 @@ class Cache:
 		))
 		self.cacheFileDir= os.path.dirname(self.cacheFileName)
 	def write(self,data):
-		if not os.path.exists(self.cacheFileDir):
-			os.makedirs(self.cacheFileDir)
-		f=open(self.cacheFileName,'w')
-		json.dump(data,f)
-		f.close()
+		try:
+			if not os.path.exists(self.cacheFileDir):
+				os.makedirs(self.cacheFileDir)
+			with open(self.cacheFileName,'w') as f:
+				json.dump(data,f)
+		except Exception as e:
+			print('Error writing cache file "{}": {}'.format(self.cacheFileName,str(e)),file=sys.stderr)
 	def read(self):
 		try:
 			with open(self.cacheFileName) as f:
@@ -32,3 +35,5 @@ class Cache:
 				return data
 		except FileNotFoundError:
 			return None
+		except Exception as e:
+			print('Error reading cache file "{}": {}'.format(self.cacheFileName,str(e)),file=sys.stderr)
