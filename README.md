@@ -1,6 +1,6 @@
 # shoppinglist-cli
 
-a command line client for [shoppinglist-cli](https://github.com/tstehr/shoppinglist)
+a command line client for [shoppinglist](https://github.com/tstehr/shoppinglist)
 
 ## Requirements
 
