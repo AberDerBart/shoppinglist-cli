@@ -8,6 +8,7 @@ shoppingList requires python3 as well as the following python libraries
 - requests
 - python-Levenshtein
 - rcfile
+- uuid
 ## Usage
 
 To use shoppinList, simply start

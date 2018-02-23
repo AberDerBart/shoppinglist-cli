@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import requests
 import json
+import uuid
 
 class List:
 	def __init__(self,server,listId):
@@ -8,15 +9,29 @@ class List:
 		self.server=server
 		self.items=[]
 		self.title=''
+		self.previousSync=None
 		self.sync()
 	def sync(self):
-		r=requests.get(self.syncUrl())
-		if(r.status_code == 200):
-			data=json.loads(r.text)
+		if not self.previousSync:
+			r=requests.get(self.syncUrl())
+		else:
+			syncRequest={
+				'previousSync':self.previousSync,
+				'currentState':{
+					'title':self.title,
+					'id':self.listId,
+					'items':self.items
+				}
+			}
 
-			self.title=data.get('title','')
-			self.title=data.get('title','')
-			self.items=data.get('items','')
+			r=requests.post(self.syncUrl(),json=syncRequest)
+		if(r.status_code == 200):
+			data=r.json()
+
+			self.previousSync=data
+			self.title=str(data.get('title',''))
+			self.items=list(data.get('items',''))
+
 	def syncUrl(self):
 		return '{}/api/{}/sync'.format(self.server,self.listId)
 	def show(self):
@@ -27,7 +42,7 @@ class List:
 		for item in self.items:
 			print("- {}".format(itemStr(item)))
 	def add(self,value):
-		self.items.append({'stringRepresentation':value})
+		self.items.append({'stringRepresentation':value, 'id': str(uuid.uuid4())})
 		self.sync()
 	def delete(self,item):
 		self.items.remove(item)
