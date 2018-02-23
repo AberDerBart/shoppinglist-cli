@@ -19,7 +19,6 @@ class List:
 			currentState=cacheData['currentState']
 			self.items=currentState['items']
 			self.title=currentState['title']
-		self.sync()
 	def syncRequestData(self):
 		return {
 			'previousSync':self.previousSync,
