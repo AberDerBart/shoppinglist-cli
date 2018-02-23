@@ -2,6 +2,7 @@
 import requests
 import json
 import uuid
+from cache import Cache
 
 class List:
 	def __init__(self,server,listId):
@@ -10,27 +11,37 @@ class List:
 		self.items=[]
 		self.title=''
 		self.previousSync=None
+
+		self.cache=Cache(self)
+		cacheData=self.cache.read()
+		if cacheData:
+			self.previousSync=cacheData['previousSync']
+			currentState=cacheData['currentState']
+			self.items=currentState['items']
+			self.title=currentState['title']
 		self.sync()
+	def syncRequestData(self):
+		return {
+			'previousSync':self.previousSync,
+			'currentState':{
+				'title':self.title,
+				'id':self.listId,
+				'items':self.items
+			}
+		}
 	def sync(self):
 		if not self.previousSync:
 			r=requests.get(self.syncUrl())
 		else:
-			syncRequest={
-				'previousSync':self.previousSync,
-				'currentState':{
-					'title':self.title,
-					'id':self.listId,
-					'items':self.items
-				}
-			}
-
-			r=requests.post(self.syncUrl(),json=syncRequest)
+			r=requests.post(self.syncUrl(),json=self.syncRequestData())
 		if(r.status_code == 200):
 			data=r.json()
 
 			self.previousSync=data
 			self.title=str(data.get('title',''))
 			self.items=list(data.get('items',''))
+		if self.previousSync:
+			self.cache.write(self.syncRequestData())
 
 	def syncUrl(self):
 		return '{}/api/{}/sync'.format(self.server,self.listId)
