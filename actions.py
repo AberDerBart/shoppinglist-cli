@@ -1,5 +1,6 @@
 from sList import *
 from autocomplete import autocomplete
+import sys
 
 def addAction(sl,args):
 	sl.add(args.value)
@@ -7,13 +8,13 @@ def addAction(sl,args):
 def delAction(sl,args):
 	(item,match)=autocomplete(args.item,sl)
 	if(match < .8):
-		raise KeyError('No matching item found: "{}"'.format(args.item))
+		sys.exit('No matching item found: "{}"'.format(args.item))
 	sl.delete(item)
 
 def editAction(sl,args):
 	(item,match)=autocomplete(args.item,sl)
 	if(match < .8):
-		raise KeyError('No matching item found: "{}"'.format(args.item))
+		sys.exit('No matching item found: "{}"'.format(args.item))
 	sl.edit(item,args.value)
 
 def clearAction(sl,args):

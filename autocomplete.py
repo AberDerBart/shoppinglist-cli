@@ -3,7 +3,7 @@ from sList import itemStr
 
 def autocomplete(string,sl):
 	bestMatch=None
-	value=None
+	value=0
 
 	for item in sl.items:
 		tmpValue=Levenshtein.jaro(string.upper(), itemStr(item).upper())
