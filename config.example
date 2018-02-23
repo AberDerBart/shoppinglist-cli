@@ -1,3 +1,4 @@
 [shoppingList]
 server=https://list.tilman.ninja
 list=Demo
+cachedir=~/.shoppingList/cache

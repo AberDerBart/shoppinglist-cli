@@ -15,4 +15,9 @@ To use shoppinList, simply start
 
 ```$ python main.py```
 
-For setting a default server and list, place a configfile like [config.example](config.example) in ~/.shoppingList/config
+## Configuration
+
+For setting a default server and list, place a configuration file like [config.example](config.example) in ~/.shoppingList/config
+
+Offline caching can be configured using the cachedir parameter in the configuration file.
+If the parameter is omitted, no data is cached
