@@ -3,6 +3,7 @@ import requests
 import json
 import uuid
 from cache import Cache
+from config import config
 
 class List:
 	def __init__(self,server,listId):
@@ -12,13 +13,17 @@ class List:
 		self.title=''
 		self.previousSync=None
 
-		self.cache=Cache(self)
-		cacheData=self.cache.read()
-		if cacheData:
-			self.previousSync=cacheData['previousSync']
-			currentState=cacheData['currentState']
-			self.items=currentState['items']
-			self.title=currentState['title']
+		if 'cachedir' in config:
+			self.cache=Cache(self)
+			cacheData=self.cache.read()
+			if cacheData:
+				self.previousSync=cacheData['previousSync']
+				currentState=cacheData['currentState']
+				self.items=currentState['items']
+				self.title=currentState['title']
+		else:
+			self.cache=None
+			self.sync()
 	def syncRequestData(self):
 		return {
 			'previousSync':self.previousSync,
@@ -42,7 +47,7 @@ class List:
 				self.items=list(data.get('items',''))
 		except IOError:
 			pass
-		if self.previousSync:
+		if self.cache and self.previousSync:
 			self.cache.write(self.syncRequestData())
 
 	def syncUrl(self):
