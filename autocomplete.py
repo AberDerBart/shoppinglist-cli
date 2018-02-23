@@ -1,11 +1,12 @@
 import Levenshtein
+from sList import itemStr
 
 def autocomplete(string,sl):
 	bestMatch=None
 	value=None
 
 	for item in sl.items:
-		tmpValue=Levenshtein.jaro(string.upper(), str(item).upper())
+		tmpValue=Levenshtein.jaro(string.upper(), itemStr(item).upper())
 		if not value or tmpValue > value:
 			value=tmpValue
 			bestMatch=item
