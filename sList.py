@@ -4,6 +4,7 @@ import json
 import uuid
 from cache import Cache
 from config import config
+import sys
 
 class List:
 	def __init__(self,server,listId):
@@ -25,6 +26,9 @@ class List:
 		else:
 			self.cache=None
 			self.sync()
+		if not self.synced and not self.previousSync:
+			sys.exit('List creation is only supported online.')
+
 	def syncRequestData(self):
 		return {
 			'previousSync':self.previousSync,
