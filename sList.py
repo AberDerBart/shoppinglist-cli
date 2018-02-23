@@ -12,6 +12,7 @@ class List:
 		self.items=[]
 		self.title=''
 		self.previousSync=None
+		self.synced=False
 
 		if 'cachedir' in config:
 			self.cache=Cache(self)
@@ -45,6 +46,8 @@ class List:
 				self.previousSync=data
 				self.title=str(data.get('title',''))
 				self.items=list(data.get('items',''))
+
+				self.synced=True
 		except IOError:
 			pass
 		if self.cache and self.previousSync:
@@ -53,10 +56,15 @@ class List:
 	def syncUrl(self):
 		return '{}/api/{}/sync'.format(self.server,self.listId)
 	def show(self):
-		if self.items:
-			print(self.title)
+		attr=[]
+		if not self.synced:
+			attr.append('offline')
+		if not self.items:
+			attr.append('empty')
+		if attr:
+			print(self.title,'({})'.format(', '.join(attr)))
 		else:
-			print(self.title,'(empty)')
+			print(self.title)
 		for item in self.items:
 			print("- {}".format(itemStr(item)))
 	def add(self,value):
