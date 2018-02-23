@@ -2,11 +2,22 @@ from config import config
 import os.path
 import json
 from sList import * 
+from hashlib import md5
+
+def cleanString(string):
+	'''transforms given string into something you can use as filename'''
+	cleaned=''.join(c for c in string if (c.isalnum() or c in '._'))
+	hashStr=md5(string.encode()).hexdigest()
+	return cleaned+'_'+hashStr
 
 class Cache:
 	def __init__(self,listInstance):
 		self.listInstance=listInstance	
-		self.cacheFileName=os.path.expanduser(config.get('cachedir')+'/'+self.listInstance.listId+'.json')
+		self.cacheFileName=os.path.expanduser('{}/{}/{}.json'.format(
+			config.get('cachedir'),
+			cleanString(self.listInstance.server),
+			cleanString(self.listInstance.listId)
+		))
 		self.cacheFileDir= os.path.dirname(self.cacheFileName)
 	def write(self,data):
 		if not os.path.exists(self.cacheFileDir):
