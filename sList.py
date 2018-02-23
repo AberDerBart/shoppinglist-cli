@@ -30,16 +30,19 @@ class List:
 			}
 		}
 	def sync(self):
-		if not self.previousSync:
-			r=requests.get(self.syncUrl())
-		else:
-			r=requests.post(self.syncUrl(),json=self.syncRequestData())
-		if(r.status_code == 200):
-			data=r.json()
+		try:
+			if not self.previousSync:
+				r=requests.get(self.syncUrl())
+			else:
+				r=requests.post(self.syncUrl(),json=self.syncRequestData())
+			if(r.status_code == 200):
+				data=r.json()
 
-			self.previousSync=data
-			self.title=str(data.get('title',''))
-			self.items=list(data.get('items',''))
+				self.previousSync=data
+				self.title=str(data.get('title',''))
+				self.items=list(data.get('items',''))
+		except IOError:
+			pass
 		if self.previousSync:
 			self.cache.write(self.syncRequestData())
 
