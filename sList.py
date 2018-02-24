@@ -23,6 +23,8 @@ class List:
 				currentState=cacheData['currentState']
 				self.items=currentState['items']
 				self.title=currentState['title']
+			else:
+				self.sync()
 		else:
 			self.cache=None
 			self.sync()
