@@ -27,7 +27,7 @@ class List:
 			self.cache=None
 			self.sync()
 		if not self.synced and not self.previousSync:
-			sys.exit('List creation is only supported online.')
+			sys.exit('List "{}" is not cached and cannot be fetched from server "{}".'.format(self.listId,self.server))
 
 	def syncRequestData(self):
 		return {
