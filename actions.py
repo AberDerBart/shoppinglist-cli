@@ -3,7 +3,12 @@ from autocomplete import autocomplete
 import sys
 
 def addAction(sl,args):
-	sl.add(args.value)
+	if(args.value):
+		sl.add(args.value)
+	else:
+		for item in sys.stdin.readlines():
+			sl.add(item)
+		
 	
 def delAction(sl,args):
 	(item,match)=autocomplete(args.item,sl)

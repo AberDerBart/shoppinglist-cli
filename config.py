@@ -9,7 +9,7 @@ subParsers=parser.add_subparsers(dest="command")
 subParsers.required=False
 
 addParser=subParsers.add_parser("add",help="adds an item to the list")
-addParser.add_argument("value",help="the value for item to be added to the list")
+addParser.add_argument("value",help="the value for item to be added to the list",nargs="?",default=None)
 
 delParse=subParsers.add_parser("del",help="deletes an item from the list")
 delParse.add_argument("item",help="the item to be deleted from the list")
