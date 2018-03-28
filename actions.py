@@ -7,7 +7,8 @@ def addAction(sl,args):
 		sl.add(args.value)
 	else:
 		for item in sys.stdin.readlines():
-			sl.add(item)
+			if not item.isspace():
+				sl.add(item)
 		
 	
 def delAction(sl,args):
