@@ -1,7 +1,6 @@
 from config import config
 import os.path
 import json
-from sList import * 
 from hashlib import md5
 import sys
 
