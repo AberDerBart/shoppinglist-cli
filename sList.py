@@ -2,9 +2,10 @@
 import requests
 import json
 import uuid
+import sys
 from cache import Cache
 from config import config
-import sys
+from category import CategoryList
 
 class List:
 	def __init__(self,server,listId):
@@ -14,6 +15,7 @@ class List:
 		self.title=''
 		self.previousSync=None
 		self.synced=False
+		self.catList=CategoryList(server,listId)
 
 		if 'cachedir' in config:
 			self.cache=Cache(self.server,self.listId)
@@ -30,6 +32,7 @@ class List:
 			self.sync()
 		if not self.synced and not self.previousSync:
 			sys.exit('List "{}" is not cached and cannot be fetched from server "{}".'.format(self.listId,self.server))
+		self.catList.pull()
 
 	def syncRequestData(self):
 		return {
