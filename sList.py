@@ -16,7 +16,7 @@ class List:
 		self.synced=False
 
 		if 'cachedir' in config:
-			self.cache=Cache(self)
+			self.cache=Cache(self.server,self.listId)
 			cacheData=self.cache.read()
 			if cacheData:
 				self.previousSync=cacheData['previousSync']

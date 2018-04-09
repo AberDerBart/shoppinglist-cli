@@ -12,12 +12,12 @@ def cleanString(string):
 	return cleaned+'_'+hashStr
 
 class Cache:
-	def __init__(self,listInstance):
-		self.listInstance=listInstance	
-		self.cacheFileName=os.path.expanduser('{}/{}/{}.json'.format(
+	def __init__(self,server,listId,ending='.json'):
+		self.cacheFileName=os.path.expanduser('{}/{}/{}{}'.format(
 			config.get('cachedir'),
-			cleanString(self.listInstance.server),
-			cleanString(self.listInstance.listId)
+			cleanString(server),
+			cleanString(listId),
+			ending
 		))
 		self.cacheFileDir= os.path.dirname(self.cacheFileName)
 	def write(self,data):
