@@ -8,7 +8,7 @@ class CategoryList:
 		self.listId=listId
 		self.categories=None
 		if 'cachedir' in config:
-			self.cache=Cache(self.server,self.listId,'.cache.json')
+			self.cache=Cache(self.server,self.listId,'.cat.json')
 			cacheData=self.cache.read()
 			if cacheData:
 				self.categories=cacheData
