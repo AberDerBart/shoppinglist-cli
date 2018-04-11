@@ -32,7 +32,8 @@ class List:
 			self.sync()
 		if not self.synced and not self.previousSync:
 			sys.exit('List "{}" is not cached and cannot be fetched from server "{}".'.format(self.listId,self.server))
-		self.catList.pull()
+		if self.synced:
+			self.catList.pull()
 
 	def syncRequestData(self):
 		return {
@@ -75,7 +76,7 @@ class List:
 		else:
 			print(self.title)
 		for item in self.items:
-			print("- {}".format(itemStr(item)))
+			print("- {}".format(itemStr(item,self.catList)))
 	def add(self,value):
 		self.items.append({'stringRepresentation':value, 'id': str(uuid.uuid4())})
 		self.sync()
@@ -95,9 +96,18 @@ class List:
 		self.items.clear()
 		self.sync()
 
-def itemStr(itemDict):
+def itemStr(itemDict, catList):
+	# extract category
+	catId=itemDict.get('category')
+	category=None
+	catString=''
+	if catId and catList.available():
+		category=catList.get(catId)
+		catString='({}) '.format(category.get('shortName','?'))
+
 	if 'stringRepresentation' in itemDict:
-		return itemDict['stringRepresentation']
+		return catString + itemDict['stringRepresentation']
+
 	string=itemDict.get('name')
 	amount=itemDict.get('amount',None)
 	if amount:
@@ -107,4 +117,4 @@ def itemStr(itemDict):
 			string='{} {}'.format(unit,string)
 		if value:
 			string='{} {}'.format(value,string)
-	return string
+	return catString + string

@@ -14,6 +14,11 @@ class CategoryList:
 				self.categories=cacheData
 		else:
 			self.cache=None
+	def get(self,catId):
+		if self.categories:
+			return self.categories.get(catId)
+	def available(self):
+		return not (self.categories is None)
 	def pull(self):
 		r=requests.get('{}/api/{}/categories'.format(self.server,self.listId))
 		if(r.status_code == 200):
