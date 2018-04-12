@@ -96,12 +96,12 @@ class List:
 		self.items.clear()
 		self.sync()
 
-def itemStr(itemDict, catList):
+def itemStr(itemDict, catList=None):
 	# extract category
 	catId=itemDict.get('category')
 	category=None
 	catString=''
-	if catId and catList.available():
+	if catId and catList and catList.available():
 		category=catList.get(catId)
 		catString='({}) '.format(category.get('shortName','?'))
 
