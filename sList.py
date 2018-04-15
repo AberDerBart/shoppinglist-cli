@@ -96,14 +96,18 @@ class List:
 		self.items.clear()
 		self.sync()
 
+def catStr(catId, catList):
+	if config.get('categories').upper()=='SHORT':
+		if catId and catList.available():
+			category=catList.get(catId)
+			return '({}) '.format(category.get('shortName','?'))
+	return ''
+
 def itemStr(itemDict, catList):
 	# extract category
 	catId=itemDict.get('category')
 	category=None
-	catString=''
-	if catId and catList.available():
-		category=catList.get(catId)
-		catString='({}) '.format(category.get('shortName','?'))
+	catString=catStr(catId,catList)
 
 	if 'stringRepresentation' in itemDict:
 		return catString + itemDict['stringRepresentation']
