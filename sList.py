@@ -96,7 +96,7 @@ class List:
 		self.sync()
 
 def catStr(catId, catList):
-	if config.get('categories').upper()=='SHORT':
+	if config.get('categories','').upper()=='SHORT':
 		if catId and catList.available():
 			category=catList.get(catId)
 			return '({}) '.format(category.get('shortName','?'))
