@@ -32,9 +32,6 @@ class List:
 			self.sync()
 		if not self.synced and not self.previousSync:
 			sys.exit('List "{}" is not cached and cannot be fetched from server "{}".'.format(self.listId,self.server))
-		if self.synced:
-			self.catList.pull()
-
 	def syncRequestData(self):
 		return {
 			'previousSync':self.previousSync,
@@ -58,6 +55,8 @@ class List:
 				self.items=list(data.get('items',''))
 
 				self.synced=True
+				# server appears to be reachable, pull categories
+				self.cache.pull()
 		except IOError:
 			pass
 		if self.cache and self.previousSync:

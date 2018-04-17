@@ -17,6 +17,7 @@ class CategoryList:
 	def get(self,catId):
 		if self.categories:
 			return self.categories.get(catId)
+		return None
 	def available(self):
 		return not (self.categories is None)
 	def pull(self):
