@@ -56,7 +56,7 @@ class List:
 
 				self.synced=True
 				# server appears to be reachable, pull categories
-				self.cache.pull()
+				self.catList.pull()
 		except IOError:
 			pass
 		if self.cache and self.previousSync:
