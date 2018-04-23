@@ -99,6 +99,8 @@ def catStr(catId, catList):
 	if config.get('categories','').upper()=='SHORT':
 		if catId and catList.available():
 			category=catList.get(catId)
+			if not category:
+				return ''
 			return '({}) '.format(category.get('shortName','?'))
 	return ''
 
