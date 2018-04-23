@@ -97,14 +97,14 @@ class List:
 
 def catStr(catId, catList):
 	if config.get('categories','').upper()=='SHORT':
-		if catId and catList.available():
+		if catId and catList and catList.available():
 			category=catList.get(catId)
 			if not category:
 				return ''
 			return '({}) '.format(category.get('shortName','?'))
 	return ''
 
-def itemStr(itemDict, catList):
+def itemStr(itemDict, catList=None):
 	# extract category
 	catId=itemDict.get('category')
 	category=None
