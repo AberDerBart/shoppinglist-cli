@@ -74,7 +74,7 @@ class List:
 			print(self.title,'({})'.format(', '.join(attr)))
 		else:
 			print(self.title)
-		count = 0
+		count = 1
 		for item in self.items:
 			if numbered:
 				print("- {} {}".format(count, itemStr(item,self.catList)))
