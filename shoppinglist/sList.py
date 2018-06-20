@@ -96,9 +96,9 @@ class List:
 		self.sync()
 	def at(self, index):
 		if 0 < index <= len(self.items):
-			return self.items[index - 1], 1.0
+			return self.items[index - 1]
 		else:
-			return None, 0.0
+			return None
 
 
 def catStr(catId, catList):
