@@ -64,7 +64,7 @@ class List:
 
 	def syncUrl(self):
 		return '{}/api/{}/sync'.format(self.server,self.listId)
-	def show(self):
+	def show(self,numbered=False):
 		attr=[]
 		if not self.synced:
 			attr.append('offline')
@@ -74,8 +74,13 @@ class List:
 			print(self.title,'({})'.format(', '.join(attr)))
 		else:
 			print(self.title)
+		count = 1
 		for item in self.items:
-			print("- {}".format(itemStr(item,self.catList)))
+			if numbered:
+				print("- {} {}".format(count, itemStr(item,self.catList)))
+				count += 1
+			else:
+				print("- {}".format(itemStr(item,self.catList)))
 	def add(self,value):
 		self.items.append({'stringRepresentation':value, 'id': str(uuid.uuid4())})
 		self.sync()
