@@ -3,9 +3,9 @@ import requests
 import json
 import uuid
 import sys
-from cache import Cache
-from config import config
-from category import CategoryList
+from .cache import Cache
+from .config import config
+from .category import CategoryList
 
 class List:
 	def __init__(self,server,listId):
