@@ -23,6 +23,8 @@ clearParse=subParsers.add_parser("clear",help="clears the list")
 parser.add_argument("--list",help="sets the list ID")
 parser.add_argument("--server",help="the URL of the server to contact")
 
+parser.add_argument("-n","--numbered",help="show list index of items",action="store_true")
+
 args=parser.parse_args()
 
 config=rcfile.rcfile('shoppinglist-cli',args.__dict__)
