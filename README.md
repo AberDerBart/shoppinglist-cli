@@ -9,11 +9,18 @@ shoppinglist-cli requires python3 as well as the following python libraries
 - python-Levenshtein
 - rcfile
 - uuid
+## Install
+
+Install using setuptools
+
+```$ pip install .```
+
+
 ## Usage
 
 To use shoppinglist-cli, simply start
 
-```$ python main.py```
+```$ shoppinglist```
 
 ## Configuration
 
