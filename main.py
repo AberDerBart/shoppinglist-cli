@@ -1,6 +1,6 @@
-import actions
-from sList import List
-from config import config,args
+from shoppinglist import actions
+from shoppinglist.sList import List
+from shoppinglist.config import config, args
 
 sl=List(config.get('server'),config.get('list'))
 

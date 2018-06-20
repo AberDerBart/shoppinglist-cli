@@ -1,4 +1,4 @@
-from config import config
+from .config import config
 import os.path
 import json
 from hashlib import md5

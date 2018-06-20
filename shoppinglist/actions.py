@@ -1,5 +1,5 @@
-from sList import *
-from autocomplete import autocomplete
+from .sList import *
+from .autocomplete import autocomplete
 import sys
 
 def addAction(sl,args):
