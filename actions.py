@@ -12,7 +12,11 @@ def addAction(sl,args):
 		
 	
 def delAction(sl,args):
-	(item,match)=autocomplete(args.item,sl)
+	if args.item.isnumeric():
+		index = int(args.item)
+		item, match = sl.at(index)
+	else:
+		item, match = autocomplete(args.item,sl)
 	if(match < .8):
 		sys.exit('No matching item found: "{}"'.format(args.item))
 	sl.delete(item)

@@ -94,6 +94,12 @@ class List:
 	def clear(self):
 		self.items.clear()
 		self.sync()
+	def at(self, index):
+		if 0 < index <= len(self.items):
+			return self.items[index - 1], 1.0
+		else:
+			return None, 0.0
+
 
 def catStr(catId, catList):
 	if config.get('categories','').upper()=='SHORT':
