@@ -16,4 +16,5 @@ setup(name='shoppinglist',
 		'uuid'
 	],
 	scripts=['bin/shoppinglist'],
-	zip_safe=False)
+	zip_safe=False,
+	license='GPLv3+')
