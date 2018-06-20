@@ -1,6 +1,6 @@
 import requests
-from cache import Cache
-from config import config
+from .cache import Cache
+from .config import config
 
 class CategoryList:
 	def __init__(self,server,listId):

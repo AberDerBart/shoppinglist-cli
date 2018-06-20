@@ -1,5 +1,5 @@
 import Levenshtein
-from sList import itemStr
+from .sList import itemStr
 
 def autocomplete(string,sl):
 	bestMatch=None
