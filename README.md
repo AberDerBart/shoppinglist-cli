@@ -12,9 +12,9 @@ shoppinglist-cli requires python3 as well as the following python libraries
 
 ## Installation
 
-To install shoppinglist-cli, run
+To install shoppinglist-cli, run:
 
-```$ python setup.py install```
+```$ pip install .```
 
 ## Usage
 
