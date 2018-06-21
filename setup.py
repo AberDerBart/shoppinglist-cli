@@ -13,7 +13,8 @@ setup(name='shoppinglist',
 		'requests',
 		'python-Levenshtein',
 		'rcfile',
-		'uuid'
+		'uuid',
+		'distutils',
 	],
 	scripts=['bin/shoppinglist'],
 	zip_safe=False)
