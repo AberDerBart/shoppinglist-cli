@@ -78,7 +78,7 @@ class List:
 		count = 1
 		for item in self.items:
 			if strtobool(config.get("numbered","0")):
-				print("- {} {}".format(count, itemStr(item,self.catList)))
+				print("{}. {}".format(count, itemStr(item,self.catList)))
 				count += 1
 			else:
 				print("- {}".format(itemStr(item,self.catList)))
