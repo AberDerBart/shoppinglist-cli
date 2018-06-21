@@ -3,3 +3,4 @@ server=https://list.tilman.ninja
 list=Demo
 cachedir=~/.shoppinglist-cli/cache
 categories=short
+numbered=true

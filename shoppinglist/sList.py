@@ -3,6 +3,7 @@ import requests
 import json
 import uuid
 import sys
+from distutils.util import strtobool
 from .cache import Cache
 from .config import config
 from .category import CategoryList
@@ -64,7 +65,7 @@ class List:
 
 	def syncUrl(self):
 		return '{}/api/{}/sync'.format(self.server,self.listId)
-	def show(self,numbered=False):
+	def show(self):
 		attr=[]
 		if not self.synced:
 			attr.append('offline')
@@ -76,7 +77,7 @@ class List:
 			print(self.title)
 		count = 1
 		for item in self.items:
-			if numbered:
+			if strtobool(config.get("numbered","0")):
 				print("- {} {}".format(count, itemStr(item,self.catList)))
 				count += 1
 			else:

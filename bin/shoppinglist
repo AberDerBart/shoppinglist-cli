@@ -11,4 +11,4 @@ if(args.command):
 else:
 	sl.sync()
 
-sl.show(numbered=args.numbered)
+sl.show()
