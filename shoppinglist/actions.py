@@ -1,5 +1,5 @@
 from .sList import *
-from .autocomplete import autocomplete
+from .match import matchItem
 import sys
 
 def addAction(sl,args):
@@ -12,21 +12,13 @@ def addAction(sl,args):
 		
 	
 def delAction(sl,args):
-	if args.item.isnumeric():
-		index = int(args.item)
-		sl.delete(sl.at(index))
-	else:
-		item, match = autocomplete(args.item,sl)
-		if(match < .8):
-			sys.exit('No matching item found: "{}"'.format(args.item))
-		sl.delete(item)
+	item, match = matchItem(args.item,sl)
+	if(match < .8):
+		sys.exit('No matching item found: "{}"'.format(args.item))
+	sl.delete(item)
 
 def editAction(sl,args):
-	if args.item.isnumeric():
-		index = int(args.item)
-		item, match = sl.at(index)
-	else:
-		item, match = autocomplete(args.item,sl)
+	item, match = matchItem(args.item,sl)
 	if(match < .8):
 		sys.exit('No matching item found: "{}"'.format(args.item))
 	sl.edit(item,args.value)

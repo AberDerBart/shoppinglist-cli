@@ -1,9 +1,13 @@
 import Levenshtein
 from .sList import itemStr
 
-def autocomplete(string,sl):
+def matchItem(string,sl):
 	bestMatch=None
 	value=0
+
+	# extract item by index
+	if string.isnumeric():
+		return sl.at(int(string)),1
 
 	for item in sl.items:
 		tmpValue=Levenshtein.jaro(string.upper(), itemStr(item).upper())
