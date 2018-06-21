@@ -22,6 +22,10 @@ Display the list:
 
 ```$ shoppinglist```
 
+Display the list _Brian_:
+
+```$ shoppinglist --list Brian```
+
 Add _spam_ to the list:
 
 ```$ shoppinglist add spam```
