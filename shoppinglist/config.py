@@ -12,10 +12,10 @@ addParser=subParsers.add_parser("add",help="adds an item to the list")
 addParser.add_argument("value",help="the value for item to be added to the list",nargs="?",default=None)
 
 delParse=subParsers.add_parser("del",help="deletes an item from the list")
-delParse.add_argument("item",help="the item to be deleted from the list")
+delParse.add_argument("item",help="the item to be deleted from the list or its index")
 
 editParse=subParsers.add_parser("edit",help="edits an item on the list")
-editParse.add_argument("item",help="the item to be edited")
+editParse.add_argument("item",help="the item to be edited or its index")
 editParse.add_argument("value",help="the new value for the item")
 
 clearParse=subParsers.add_parser("clear",help="clears the list")

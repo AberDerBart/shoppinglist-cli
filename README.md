@@ -9,11 +9,38 @@ shoppinglist-cli requires python3 as well as the following python libraries
 - python-Levenshtein
 - rcfile
 - uuid
+
+## Installation
+
+To install shoppinglist-cli, run
+
+```$ python setup.py install```
+
 ## Usage
 
-To use shoppinglist-cli, simply start
+Display the list:
 
-```$ python main.py```
+```$ shoppinglist```
+
+Add _spam_ to the list:
+
+```$ shoppinglist add spam```
+
+Change _spam_ to _eggs_:
+
+```$ shoppinglist edit Spam eggs```
+
+Delete _eggs_:
+
+```$ shoppinglist del eggs```
+
+Delete the third item:
+
+```$ shoppinglist del 3```
+
+For further usage information, run:
+
+``` $ shoppinglist [command] --help```
 
 ## Configuration
 
