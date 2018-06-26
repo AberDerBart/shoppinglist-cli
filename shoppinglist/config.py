@@ -20,6 +20,8 @@ editParse.add_argument("value",help="the new value for the item")
 
 clearParse=subParsers.add_parser("clear",help="clears the list")
 
+categoriesParse=subParsers.add_parser("categories",help="lists the categories")
+
 parser.add_argument("--list",help="sets the list ID")
 parser.add_argument("--server",help="the URL of the server to contact")
 

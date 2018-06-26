@@ -32,4 +32,6 @@ class CategoryList:
 					self.categories[catId]=cat
 			if self.cache:
 				self.cache.write(self.categories)
-	
+	def show(self):
+		for cat in self.categories.values():
+			print('({}) {}'.format(cat.get('shortName','?'),cat.get('name')))
