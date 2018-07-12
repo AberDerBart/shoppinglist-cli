@@ -4,6 +4,8 @@ import json
 import uuid
 import sys
 from distutils.util import strtobool
+from xtermcolor import colorize
+from tinycss2.color3 import parse_color
 from .cache import Cache
 from .config import config
 from .category import CategoryList
@@ -113,8 +115,16 @@ def catStr(catId, catList):
 			category=catList.get(catId)
 			if not category:
 				return ''
-			return '({}) '.format(category.get('shortName','?'))
+			result = '({}) '.format(category.get('shortName','?'))
+			if strtobool(config.get('colored','1')) and 'color' in category:
+				rgbTupleColor = parse_color(category['color'])
+				rgbIntegerColor = rgbToInteger(rgbTupleColor)
+				return colorize(result, rgb=rgbIntegerColor)
+			return result
 	return ''
+
+def rgbToInteger(rgb):
+	return (int(rgb.red * 255) << 16) + (int(rgb.green * 255) << 8) + int(rgb.blue * 255)
 
 def itemStr(itemDict, catList=None):
 	# extract category

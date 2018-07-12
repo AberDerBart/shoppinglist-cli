@@ -4,3 +4,4 @@ list=Demo
 cachedir=~/.shoppinglist-cli/cache
 categories=short
 numbered=true
+colored=true

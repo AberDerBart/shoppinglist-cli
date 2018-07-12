@@ -14,7 +14,9 @@ setup(
         'requests',
         'python-Levenshtein',
         'rcfile',
-        'uuid'
+        'uuid',
+        'xtermcolor',
+        'tinycss2'
     ],
     scripts=['bin/shoppinglist'],
     zip_safe=False,
