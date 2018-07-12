@@ -37,10 +37,12 @@ class CategoryList:
 				self.cache.write(self.categories)
 	def show(self):
 		for cat in self.categories.values():
-			catStr = '({}) {}'.format(cat.get('shortName','?'),cat.get('name'))
+			shortName='({})'.format(cat.get('shortName','?'))
 			color = catColorAsRGBInt(cat)
 			if strtobool(config.get('colored','1')) and color is not None:
-				catStr = colorize(catStr, rgb=color)
+				shortName = colorize(shortName, rgb=color)
+
+			catStr = '{} {}'.format(shortName,cat.get('name'))
 			print(catStr)
 
 def catColorAsRGBInt(category):
