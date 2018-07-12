@@ -5,10 +5,9 @@ import uuid
 import sys
 from distutils.util import strtobool
 from xtermcolor import colorize
-from tinycss2.color3 import parse_color
 from .cache import Cache
 from .config import config
-from .category import CategoryList
+from .category import CategoryList, catColorAsRGBInt
 
 class List:
 	def __init__(self,server,listId):
@@ -116,15 +115,13 @@ def catStr(catId, catList):
 			if not category:
 				return ''
 			result = '({}) '.format(category.get('shortName','?'))
-			if strtobool(config.get('colored','1')) and 'color' in category:
-				rgbTupleColor = parse_color(category['color'])
-				rgbIntegerColor = rgbToInteger(rgbTupleColor)
-				return colorize(result, rgb=rgbIntegerColor)
+			color = catColorAsRGBInt(category)
+			if strtobool(config.get('colored','1')) and color is not None:
+				return colorize(result, rgb=color)
 			return result
 	return ''
 
-def rgbToInteger(rgb):
-	return (int(rgb.red * 255) << 16) + (int(rgb.green * 255) << 8) + int(rgb.blue * 255)
+
 
 def itemStr(itemDict, catList=None):
 	# extract category
