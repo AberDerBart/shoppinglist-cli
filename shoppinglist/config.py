@@ -34,7 +34,9 @@ parser.add_argument("-c","--nocolor",help="disable colors",dest="colored",action
 
 args=parser.parse_args()
 
-config=rcfile.rcfile('shoppinglist-cli',args.__dict__)
+cmdArgs={k:v for k,v in args.__dict__.items() if v is not None}
+
+config=rcfile.rcfile('shoppinglist-cli',cmdArgs)
 
 if not config.get('server'):
 	config['server']=DEFAULT_SERVER
