@@ -28,6 +28,9 @@ parser.add_argument("--server",help="the URL of the server to contact")
 parser.add_argument("-N","--numbers",help="show list index of items",action="store_const",dest="numbered",const="1")
 parser.add_argument("-n","--nonumbers",help="do not show list index of items",action="store_const",dest="numbered",const="0")
 
+parser.add_argument("-C","--color",help="enable colors",dest="colored",action="store_const",const="1")
+parser.add_argument("-c","--nocolor",help="disable colors",dest="colored",action="store_const",const="0")
+
 
 args=parser.parse_args()
 
