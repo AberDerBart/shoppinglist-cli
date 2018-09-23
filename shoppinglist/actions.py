@@ -7,7 +7,7 @@ def categoriesAction(sl,args):
 
 def addAction(sl,args):
 	if(args.value):
-		sl.add(args.value)
+		sl.add(' '.join(args.value))
 	else:
 		for item in sys.stdin.readlines():
 			if not item.isspace():
@@ -26,7 +26,7 @@ def editAction(sl,args):
 	item, match = matchItem(args.item,sl)
 	if(match < .8):
 		sys.exit('No matching item found: "{}"'.format(args.item))
-	sl.edit(item,args.value)
+	sl.edit(item,' '.join(args.value))
 	sl.show()
 
 def clearAction(sl,args):
