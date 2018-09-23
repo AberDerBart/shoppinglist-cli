@@ -16,10 +16,14 @@ def addAction(sl,args):
 		
 	
 def delAction(sl,args):
-	item, match = matchItem(args.item,sl)
-	if(match < .8):
-		sys.exit('No matching item found: "{}"'.format(args.item))
-	sl.delete(item)
+	itemsToDelete=[]
+	for itemStr in args.items.split(','):
+		item, match = matchItem(itemStr,sl)
+		if(match < .8):
+			sys.exit('No matching item found: "{}"'.format(itemStr))
+		itemsToDelete = itemsToDelete + [item]
+	for item in itemsToDelete:
+		sl.delete(item)
 	sl.show()
 
 def editAction(sl,args):
