@@ -7,7 +7,11 @@ def matchItem(string,sl):
 
 	# extract item by index
 	if string.isnumeric():
-		return sl.at(int(string)),1
+		item=sl.at(int(string))
+		if(item):
+			return item,1
+		else:
+			return item,0
 
 	for item in sl.items:
 		tmpValue=Levenshtein.jaro(string.upper(), itemStr(item).upper())
