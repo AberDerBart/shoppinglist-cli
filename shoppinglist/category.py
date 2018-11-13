@@ -48,5 +48,7 @@ class CategoryList:
 def catColorAsRGBInt(category):
 	if 'color' in category:
 		rgb = parse_color(category['color'])
+		if rgb is None:
+			return None
 		return (int(rgb.red * 255) << 16) + (int(rgb.green * 255) << 8) + int(rgb.blue * 255)
 	return None
