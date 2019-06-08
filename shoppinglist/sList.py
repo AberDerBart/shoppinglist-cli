@@ -48,7 +48,7 @@ class List:
 			if not self.previousSync:
 				r=requests.get(self.syncUrl())
 			else:
-				r=requests.post(self.syncUrl(),json=self.syncRequestData())
+				r=requests.post(self.syncUrl(),json=self.syncRequestData(),headers={'X-ShoppingList-Username': config.get('username')})
 			if(r.status_code == 200):
 				data=r.json()
 
