@@ -85,10 +85,8 @@ class List:
 				print("- {}".format(itemStr(item,self.catList)))
 	def add(self,value):
 		self.items.append({'stringRepresentation':value, 'id': str(uuid.uuid4())})
-		self.sync()
 	def delete(self,item):
 		self.items.remove(item)
-		self.sync()
 	def edit(self,item,value):
 		if('id' in item):
 			itemId=item['id']
@@ -97,10 +95,8 @@ class List:
 		else:
 			item.clear()
 		item['stringRepresentation']=value
-		self.sync()
 	def clear(self):
 		self.items.clear()
-		self.sync()
 	def at(self, index):
 		if 0 < index <= len(self.items):
 			return self.items[index - 1]

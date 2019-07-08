@@ -12,6 +12,7 @@ def addAction(sl,args):
 		for item in sys.stdin.readlines():
 			if not item.isspace():
 				sl.add(item)
+	sl.sync()
 	sl.show()
 		
 	
@@ -24,6 +25,7 @@ def delAction(sl,args):
 		itemsToDelete = itemsToDelete + [item]
 	for item in itemsToDelete:
 		sl.delete(item)
+	sl.sync()
 	sl.show()
 
 def editAction(sl,args):
@@ -31,10 +33,12 @@ def editAction(sl,args):
 	if(match < .8):
 		sys.exit('No matching item found: "{}"'.format(args.item))
 	sl.edit(item,' '.join(args.value))
+	sl.sync()
 	sl.show()
 
 def clearAction(sl,args):
 	sl.clear()
+	sl.sync()
 	sl.show()
 
 actionDict={
