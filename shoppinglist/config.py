@@ -1,5 +1,6 @@
 import argparse
-import rcfile
+import configparser
+import os
 
 DEFAULT_SERVER = 'https://list.tilman.ninja'
 DEFAULT_LIST   = 'Demo'
@@ -37,9 +38,9 @@ args=parser.parse_args()
 
 cmdArgs={k:v for k,v in args.__dict__.items() if v is not None}
 
-config=rcfile.rcfile('shoppinglist-cli',cmdArgs)
+configParser = configparser.ConfigParser()
+configParser['DEFAULTS'] = {'server': DEFAULT_SERVER, 'list':DEFAULT_LIST}
+configParser.read([os.path.expanduser('~/.shoppinglist-cli/config'), '/etc/shoppinglist-cli'])
 
-if not config.get('server'):
-	config['server']=DEFAULT_SERVER
-if not config.get('list'):
-	config['list']=DEFAULT_LIST
+config = dict(configParser['shoppinglist-cli'])
+config.update(cmdArgs)

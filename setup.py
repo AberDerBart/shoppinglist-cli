@@ -13,7 +13,7 @@ setup(
     install_requires=[
         'requests',
         'python-Levenshtein',
-        'rcfile',
+        'configfile',
         'uuid',
         'xtermcolor',
         'tinycss2'
