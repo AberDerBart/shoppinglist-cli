@@ -23,9 +23,9 @@ clearParse=subParsers.add_parser("clear",help="clears the list")
 
 categoriesParse=subParsers.add_parser("categories",help="lists the categories")
 
-parser.add_argument("--list",help="sets the list ID")
-parser.add_argument("--server",help="the URL of the server to contact")
-parser.add_argument("--username",help="Username to send to server")
+parser.add_argument("-l", "--list",help="sets the list ID")
+parser.add_argument("-s", "--server",help="the URL of the server to contact")
+parser.add_argument("-u", "--username",help="Username to send to server")
 
 parser.add_argument("-N","--numbers",help="show list index of items",action="store_const",dest="numbered",const="1")
 parser.add_argument("-n","--nonumbers",help="do not show list index of items",action="store_const",dest="numbered",const="0")
