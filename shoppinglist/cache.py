@@ -1,4 +1,3 @@
-from .config import config
 import os.path
 import json
 from hashlib import md5
@@ -11,9 +10,9 @@ def cleanString(string):
 	return cleaned+'_'+hashStr
 
 class Cache:
-	def __init__(self,server,listId,ending='.json'):
+	def __init__(self,cachedir,server,listId,ending='.json'):
 		self.cacheFileName=os.path.expanduser('{}/{}/{}{}'.format(
-			config.get('cachedir'),
+            cachedir,
 			cleanString(server),
 			cleanString(listId),
 			ending

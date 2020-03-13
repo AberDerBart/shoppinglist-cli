@@ -20,7 +20,7 @@ class List:
 		self.catList=CategoryList(server,listId)
 
 		if 'cachedir' in config:
-			self.cache=Cache(self.server,self.listId)
+			self.cache=Cache(config.get('cachedir'), self.server,self.listId)
 			cacheData=self.cache.read()
 			if cacheData:
 				self.previousSync=cacheData['previousSync']
