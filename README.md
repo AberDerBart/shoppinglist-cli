@@ -48,7 +48,8 @@ For further usage information, run:
 
 ## Configuration
 
-For setting a default server and list, place a configuration file like [config.example](config.example) in ~/.shoppinglist-cli/config
+For setting a default username, server and list, place a configuration file like [config.example](config.example) in ~/.shoppinglist-cli/config
+Alternatively, you can set them using the environment variables SHOP_USER, SHOP_SERVER and SHOP_LIST respectively.
 
 Offline caching can be configured using the cachedir parameter in the configuration file.
 If the parameter is omitted, no data is cached
