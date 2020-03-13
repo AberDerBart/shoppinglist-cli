@@ -16,7 +16,8 @@ setup(
         'configfile',
         'uuid',
         'xtermcolor',
-        'tinycss2'
+        'tinycss2',
+        'argcomplete'
     ],
     scripts=['bin/shoppinglist'],
     zip_safe=False,

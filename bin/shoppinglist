@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# PYTHON_ARGCOMPLETE_OK
 
 from shoppinglist import actions
 from shoppinglist.sList import List

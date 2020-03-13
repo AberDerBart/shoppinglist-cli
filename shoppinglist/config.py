@@ -1,16 +1,26 @@
 import argparse
 import configparser
 import os
+import argcomplete
+from .completion import ItemStringCompleter
 
 DEFAULT_SERVER = 'https://list.tilman.ninja'
 DEFAULT_LIST   = 'Demo'
+
+# read the config fomr ~/.shoppinglist-cli/config or /etc/shoppinglist-cli
+configParser = configparser.ConfigParser()
+configParser['DEFAULTS'] = {'server': DEFAULT_SERVER, 'list':DEFAULT_LIST}
+configParser.read([os.path.expanduser('~/.shoppinglist-cli/config'), '/etc/shoppinglist-cli'])
+
+config = dict(configParser['shoppinglist-cli'])
 
 parser=argparse.ArgumentParser()
 subParsers=parser.add_subparsers(dest="command")
 subParsers.required=False
 
 addParser=subParsers.add_parser("add",help="adds an item to the list")
-addParser.add_argument("value",help="the value for item to be added to the list",nargs="*",default=None)
+addedItem = addParser.add_argument("value",help="the value for item to be added to the list",nargs="*",default=None)
+addedItem.completer = ItemStringCompleter(config)
 
 delParse=subParsers.add_parser("del",help="deletes an item from the list")
 delParse.add_argument("items",help="a comma-seperated list of the items to be deleted from the list or their indices")
@@ -33,14 +43,10 @@ parser.add_argument("-n","--nonumbers",help="do not show list index of items",ac
 parser.add_argument("-C","--color",help="enable colors",dest="colored",action="store_const",const="1")
 parser.add_argument("-c","--nocolor",help="disable colors",dest="colored",action="store_const",const="0")
 
+argcomplete.autocomplete(parser)
 
 args=parser.parse_args()
 
 cmdArgs={k:v for k,v in args.__dict__.items() if v is not None}
 
-configParser = configparser.ConfigParser()
-configParser['DEFAULTS'] = {'server': DEFAULT_SERVER, 'list':DEFAULT_LIST}
-configParser.read([os.path.expanduser('~/.shoppinglist-cli/config'), '/etc/shoppinglist-cli'])
-
-config = dict(configParser['shoppinglist-cli'])
 config.update(cmdArgs)
