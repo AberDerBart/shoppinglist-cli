@@ -39,7 +39,7 @@ args=parser.parse_args()
 cmdArgs={k:v for k,v in args.__dict__.items() if v is not None}
 
 configParser = configparser.ConfigParser()
-configParser['DEFAULTS'] = {'server': DEFAULT_SERVER, 'list':DEFAULT_LIST}
+configParser['shoppinglist-cli'] = {'server': DEFAULT_SERVER, 'list':DEFAULT_LIST}
 configParser.read([os.path.expanduser('~/.shoppinglist-cli/config'), '/etc/shoppinglist-cli'])
 
 config = dict(configParser['shoppinglist-cli'])
